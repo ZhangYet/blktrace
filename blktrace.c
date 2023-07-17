@@ -1773,7 +1773,7 @@ static int handle_pfds_entries(struct tracer *tp, int nevs, int force_read)
 	struct trace_buf *tbp;
 	struct pollfd *pfd = tp->pfds;
 	struct io_info *iop = tp->ios;
-
+	fprintf(stderr, "[DEBUG] setup handle_pfds_entries\n");
 	tbp = alloc_trace_buf(tp->cpu, buf_size);
 	for (i = 0; i < ndevs; i++, pfd++, iop++) {
 		if (pfd->revents & POLLIN || force_read) {
@@ -1797,7 +1797,6 @@ static int handle_pfds_entries(struct tracer *tp, int nevs, int force_read)
 			if (!piped_output && --nevs == 0)
 				break;
 		}
-		fprintf(stderr, "[DEBUG] out of if %d, %d\n", i, ndevs);
 	}
 	free(tbp);
 
