@@ -1776,7 +1776,6 @@ static int handle_pfds_entries(struct tracer *tp, int nevs, int force_read)
 
 	tbp = alloc_trace_buf(tp->cpu, buf_size);
 	for (i = 0; i < ndevs; i++, pfd++, iop++) {
-	  fprintf(stderr, "[DEBUG] %d, %d\n", i, ndevs);
 		if (pfd->revents & POLLIN || force_read) {
 			tbp->len = read(iop->ifd, tbp->buf, buf_size);
 			if (tbp->len > 0) {
@@ -1798,6 +1797,7 @@ static int handle_pfds_entries(struct tracer *tp, int nevs, int force_read)
 			if (!piped_output && --nevs == 0)
 				break;
 		}
+		fprintf(stderr, "[DEBUG] out of if %d, %d\n", i, ndevs);
 	}
 	free(tbp);
 
