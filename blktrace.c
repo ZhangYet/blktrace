@@ -1060,7 +1060,7 @@ static void close_client_connections(void)
 static void setup_buts(void)
 {
 	struct list_head *p;
-
+	/* devpaths: device paths, like /dev/sda. */
 	__list_for_each(p, &devpaths) {
 		struct blk_user_trace_setup buts;
 		struct devpath *dpp = list_entry(p, struct devpath, head);
@@ -1646,6 +1646,7 @@ static int open_ios(struct tracer *tp)
 		iop->ofd = -1;
 		snprintf(iop->ifn, sizeof(iop->ifn), "%s/block/%s/trace%d",
 			debugfs_path, dpp->buts_name, tp->cpu);
+		fprintf(stdout, "DEBUG: open_ios %s\n", iop->ifn);
 
 		iop->ifd = my_open(iop->ifn, O_RDONLY | O_NONBLOCK);
 		if (iop->ifd < 0) {
