@@ -1064,7 +1064,7 @@ static void setup_buts(void)
 	__list_for_each(p, &devpaths) {
 		struct blk_user_trace_setup buts;
 		struct devpath *dpp = list_entry(p, struct devpath, head);
-
+		fprintf(stdout, "DEBUG: blktrace setup_buts: %s\n", dpp->path);
 		memset(&buts, 0, sizeof(buts));
 		buts.buf_size = buf_size;
 		buts.buf_nr = buf_nr;
